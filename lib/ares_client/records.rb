@@ -91,7 +91,7 @@ module AresClient
     end
 
     def full_city
-      if city_part
+      if city_part && city_part != city
         "#{city} - #{city_part}"
       else
         city
