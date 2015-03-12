@@ -54,6 +54,10 @@ module AresClient
       basic_output['Adresa_ARES']['Cislo_domovni']
     end
 
+    def city_part
+      basic_output['Adresa_ARES']['Nazev_casti_obce']
+    end
+
     def zip
       basic_output['Adresa_ARES']['PSC']
     end
@@ -80,6 +84,18 @@ module AresClient
 
     def court_reg_no
       court_info['Spisova_znacka']['Oddil_vlozka'] if court_info && court_info['Spisova_znacka']
+    end
+
+    def full_street
+      "#{street || city_part || city} #{street_no}"
+    end
+
+    def full_city
+      if city_part
+        "#{city} - #{city_part}"
+      else
+        city
+      end
     end
 
     def self.find_by_ic(ic)
